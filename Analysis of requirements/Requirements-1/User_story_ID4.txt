@@ -1,0 +1,24 @@
+ID4 Проверка авторизации перед доступом к функциональности / Authorization Check before Accessing Functionality
+RU: Я, как пользователь системы, хочу быть уверенным, что для доступа к определенной функциональности требуется авторизация. Это важно для безопасности моих данных и выполнения действий, связанных с моим аккаунтом.
+
+Критерии приемки:
+
+При переходе на страницы “Корзина”, “Оплата” и “История заказов” система должна проверять статус авторизации пользователя.
+
+Если пользователь не авторизован, то должно отображаться сообщение о необходимости авторизации.
+
+Сообщение о необходимости авторизации должно содержать ссылку на страницу входа (/login).
+
+После клика на ссылку для входа, пользователь должен быть перенаправлен на страницу входа.
+
+EN: As a system user, I want to ensure that access to certain functionality requires authorization. This is important for the security of my data and for performing actions related to my account.
+
+Acceptance Criteria:
+
+When navigating to the “Корзина”, “Оплата”, and “История заказов” pages, the system should check for the presence of an user’s authorization.
+
+If the authorization is missing, the user should be presented with a message indicating the need for authorization.
+
+The authorization message should include a link to the login page (/login).
+
+Upon clicking the login link, the user should be redirected to the login page.

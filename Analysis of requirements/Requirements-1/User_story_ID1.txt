@@ -1,0 +1,44 @@
+ID1 Регистрация пользователя / User Registration
+RU: Как новый пользователь,
+Я хочу создать аккаунт на сайте,
+Чтобы иметь доступ к персонализированным функциям и содержанию.
+
+Критерии приемки:
+
+Пользователь должен ввести имя пользователя и пароль для создания аккаунта.
+
+Имя пользователя должно содержать от 3 до 15 символов и может включать буквы, цифры и символы: _.
+
+Пароль должен содержать не менее 8 символов, включая минимум одну букву и одну цифру.
+
+При успешной регистрации кнопка “Войти” заменяется на кнопку “Выйти”.
+
+https://www.figma.com/file/2T99Jt5OHPqkhe4yyoe2IC/demoshopping.ru?type=design&node-id=3-670&mode=design&t=rTF52a9GzKvevZ0c-4
+
+Исключительные случаи:
+
+Если имя пользователя или пароль не соответствуют требованиям, пользователь видит сообщение: “Логин должен содержать от 3 до 15 символов и может включать буквы, цифры и символы: _. Пароль должен содержать не менее 8 символов, включая минимум одну букву и одну цифру”.
+
+При ошибке на сервере пользователь получает сообщение: “Произошла ошибка при обработке запроса”.
+
+EN: As a new user,
+I want to create an account on the website,
+So that I can access personalized features and content.
+
+Acceptance Criteria:
+
+The user must enter a username and password to create an account.
+
+The username must contain 3 to 15 characters and can include letters, numbers, and symbols: _.
+
+The password must be at least 8 characters long, including at least one letter and one number.
+
+The button “Войти” should change to “Выйти” after successful registration.
+
+Exception Cases:
+
+If the username or password does not meet the requirements, the user sees the message: “The username must contain 3 to 15 characters and can include letters, numbers, and symbols: _. The password must be at least 8 characters long, including at least one letter and one number”.
+
+In case of a server error, the user receives the message: “An error occurred while processing the request”.
+
+https://www.figma.com/file/2T99Jt5OHPqkhe4yyoe2IC/demoshopping.ru?type=design&node-id=3-670&mode=design&t=rTF52a9GzKvevZ0c-4

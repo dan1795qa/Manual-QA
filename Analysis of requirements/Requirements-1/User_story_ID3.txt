@@ -1,0 +1,20 @@
+ID3 Выход из системы / User Logout
+RU: Как зарегистрированный пользователь,
+Я хочу иметь возможность выйти из системы,
+Чтобы завершить сессию и убедиться, что мой аккаунт защищен.
+
+Критерии приемки:
+
+При нажатии на кнопку “Выйти”, пользователь выходит из системы.
+
+После выхода, состояние системы возвращается к неавторизованному виду, и пользователь перенаправляется на страницу входа или главную страницу.
+
+EN: As a registered user,
+I want to be able to log out,
+So that I can end my session and ensure my account is secure.
+
+Acceptance Criteria:
+
+By clicking the “Logout” button, the user logs out of the system.
+
+After logging out, the system reverts to an unauthorized state, and the user is redirected to the login page or the homepage.

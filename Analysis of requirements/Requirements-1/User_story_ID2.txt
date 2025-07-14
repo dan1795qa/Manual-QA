@@ -1,0 +1,36 @@
+ID2 Вход в систему / User Login
+RU: Как зарегистрированный пользователь,
+Я хочу войти в систему,
+Чтобы получить доступ к моему аккаунту и персонализированным настройкам.
+
+Критерии приемки:
+
+Пользователь должен ввести своё имя пользователя и пароль, чтобы войти.
+
+После успешного входа, пользователь перенаправляется на главную страницу.
+
+Исключительные случаи:
+
+Если введенные данные не соответствуют требованиям валидации, пользователь видит сообщение об ошибке.
+
+При неудачной попытке входа из-за неверного имени пользователя или пароля, отображается сообщение: “Неверное имя пользователя или пароль”.
+
+https://www.figma.com/file/2T99Jt5OHPqkhe4yyoe2IC/demoshopping.ru?type=design&node-id=3-670&mode=design&t=rTF52a9GzKvevZ0c-4
+
+EN: As a registered user,
+I want to log in,
+So that I can access my account and personalized settings.
+
+Acceptance Criteria:
+
+The user must enter their username and password to log in.
+
+After successful login, the user is redirected to the homepage.
+
+Exception Cases:
+
+If the entered data does not meet the validation requirements, the user sees an error message.
+
+In case of a failed login attempt due to incorrect username or password, the message displayed is: “Incorrect username or password”.
+
+https://www.figma.com/file/2T99Jt5OHPqkhe4yyoe2IC/demoshopping.ru?type=design&node-id=3-670&mode=design&t=rTF52a9GzKvevZ0c-4
