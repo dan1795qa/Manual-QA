@@ -1,0 +1,388 @@
+{
+	"info": {
+		"_postman_id": "ace57db8-69e0-4c3c-860f-ef719fc7dff6",
+		"name": "Group_33_lessons",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24724780"
+	},
+	"item": [
+		{
+			"name": "Les_1",
+			"item": [
+				{
+					"name": "/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/ first",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/first",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"first"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/ get_method",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/get_method?age=33&name=vadim",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"get_method"
+							],
+							"query": [
+								{
+									"key": "age",
+									"value": "33"
+								},
+								{
+									"key": "name",
+									"value": "vadim"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/ user_info_1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "vadim",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "33",
+									"type": "text"
+								},
+								{
+									"key": "weight",
+									"value": "100",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/user_info_1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user_info_1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Les_2",
+			"item": [
+				{
+					"name": "user_info_3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "age",
+									"value": "25",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "dani",
+									"type": "text"
+								},
+								{
+									"key": "salary",
+									"value": "2000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/user_info_3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user_info_3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var resp_token = jsonData.token\r",
+									"\r",
+									"console.log(resp_token)\r",
+									"\r",
+									"pm.environment.set(\"token\", resp_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "login",
+									"value": "Dani",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new_data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var resp_age = jsonData.age\r",
+									"\r",
+									"var req = request.data\r",
+									"var req_age = req.age\r",
+									"\r",
+									"var req_url = pm.request.url.query.toObject();\r",
+									"\r",
+									"\r",
+									"console.log(\"req_url = \", req_url.name)\r",
+									"console.log(\"Resp_age = \" + resp_age)\r",
+									"console.log(\"Req_age = \" + req_age)\r",
+									"\r",
+									"\r",
+									"// pm.test(\"Req_Resp_AGE_check\", function () {\r",
+									"//     pm.expect(resp_age).to.eql(req_age);\r",
+									"// });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "dani",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "25",
+									"type": "text"
+								},
+								{
+									"key": "salary",
+									"value": "2000",
+									"type": "text"
+								},
+								{
+									"key": "auth_token",
+									"value": "{{token}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/new_data?name=Alex",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"new_data"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Alex"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user_info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var req_raw_json = JSON.parse(pm.request.body.raw)\r",
+									"\r",
+									"\r",
+									"console.log(\"req_raw = \", req_raw_json.salary)\r",
+									"\r",
+									"\r",
+									"// сравнение ож значения и полученного\r",
+									"pm.test(\"Req_Resp_AGE_check\", function () {\r",
+									"    pm.expect(resp_age).to.eql(req_age);       \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"age\": 33,\r\n    \"salary\": 1000,\r\n    \"name\": \"Vadim\",\r\n    \"auth_token\": \"{{token}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user_info",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user_info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user_info_josn_vnutri_json",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var resp_json = pm.response.json();\r",
+									"var resp_u_age = resp_json.person.u_age\r",
+									"\r",
+									"var req = request.data\r",
+									"\r",
+									"var req_raw_json = JSON.parse(pm.request.body.raw)\r",
+									"var req_age = req_raw_json.age;\r",
+									"\r",
+									"var req_url = pm.request.url.query.toObject();\r",
+									"\r",
+									"// вытягиваем из массива\r",
+									"var resp_salary = resp_json.person.u_name[1]\r",
+									"var req_salary = req_raw_json.salary\r",
+									"\r",
+									"console.log(\"req_age = \", req_age)\r",
+									"console.log(\"resp_u_age = \", resp_u_age)\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Req_Resp_AGE_check\", function () {\r",
+									"    pm.expect(req_age).to.eql(resp_u_age);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Req_Resp_AGE_check\", function () {\r",
+									"    pm.expect(req_salary).to.eql(resp_salary);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"age\": 33,\r\n    \"salary\": 1000,\r\n    \"name\": \"Vadim\",\r\n    \"auth_token\": \"{{token}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user_info",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user_info"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
