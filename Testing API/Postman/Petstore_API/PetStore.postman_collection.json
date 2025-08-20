@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "b00f6a42-5a81-4640-b47d-83c30d054365",
+		"name": "PetStore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24724780"
+	},
+	"item": [
+		{
+			"name": "Add pet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 10,\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"animal\"\r\n  },\r\n  \"name\": \"Bulldog\",\r\n  \"photoUrls\": [\r\n    \"https://site.com/bulldog/photo\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"#dog\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}  ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
