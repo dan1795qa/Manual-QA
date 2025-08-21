@@ -35,6 +35,34 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Finds Pets by status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/findByStatus?status=hungry",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"findByStatus"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "hungry"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
