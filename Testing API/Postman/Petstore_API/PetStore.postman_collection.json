@@ -7,62 +7,212 @@
 	},
 	"item": [
 		{
-			"name": "Add pet",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"id\": 10,\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"animal\"\r\n  },\r\n  \"name\": \"Bulldog\",\r\n  \"photoUrls\": [\r\n    \"https://site.com/bulldog/photo\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"#dog\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}  ",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Positive",
+			"item": [
+				{
+					"name": "Add pet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 10,\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"animal\"\r\n  },\r\n  \"name\": \"Bulldog\",\r\n  \"photoUrls\": [\r\n    \"https://site.com/bulldog/photo\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"#dog\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}  ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base_PetStore}}/pet",
+							"host": [
+								"{{url_base_PetStore}}"
+							],
+							"path": [
+								"pet"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://petstore.swagger.io/v2/pet",
-					"protocol": "https",
-					"host": [
-						"petstore",
-						"swagger",
-						"io"
-					],
-					"path": [
-						"v2",
-						"pet"
-					]
+				{
+					"name": "Finds Pets by status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_base_PetStore}}/pet/findByStatus?status=hungry",
+							"host": [
+								"{{url_base_PetStore}}"
+							],
+							"path": [
+								"pet",
+								"findByStatus"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "hungry"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change status pet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 10,\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"animal\"\r\n  },\r\n  \"name\": \"Bulldog\",\r\n  \"photoUrls\": [\r\n    \"https://site.com/bulldog/photo\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"#Bulldog\"\r\n    }\r\n  ],\r\n  \"status\": \"sold\"\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base_PetStore}}/pet",
+							"host": [
+								"{{url_base_PetStore}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete pet from store",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_base_PetStore}}/pet/10",
+							"host": [
+								"{{url_base_PetStore}}"
+							],
+							"path": [
+								"pet",
+								"10"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Finds Pets by status",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://petstore.swagger.io/v2/pet/findByStatus?status=hungry",
-					"protocol": "https",
-					"host": [
-						"petstore",
-						"swagger",
-						"io"
-					],
-					"path": [
-						"v2",
-						"pet",
-						"findByStatus"
-					],
-					"query": [
-						{
-							"key": "status",
-							"value": "hungry"
+			"name": "Negative",
+			"item": [
+				{
+					"name": "Add pet - method GET",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 10,\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"animal\"\r\n  },\r\n  \"name\": \"Bulldog\",\r\n  \"photoUrls\": [\r\n    \"https://site.com/bulldog/photo\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"#dog\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}  ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base_PetStore}}/pet",
+							"host": [
+								"{{url_base_PetStore}}"
+							],
+							"path": [
+								"pet"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "Add pet with no exist status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 10,\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"animal\"\r\n  },\r\n  \"name\": \"Bulldog\",\r\n  \"photoUrls\": [\r\n    \"https://site.com/bulldog/photo\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"#dog\"\r\n    }\r\n  ],\r\n  \"status\": \"hungry\"\r\n}  ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base_PetStore}}/pet",
+							"host": [
+								"{{url_base_PetStore}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add pet (conent-type=xml)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n  \"id\": 10,\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"animal\"\r\n  },\r\n  \"name\": \"Bulldog\",\r\n  \"photoUrls\": [\r\n    \"https://site.com/bulldog/photo\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"#dog\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base_PetStore}}/pet",
+							"host": [
+								"{{url_base_PetStore}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }
