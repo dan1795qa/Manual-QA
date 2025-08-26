@@ -11,12 +11,40 @@
 			"item": [
 				{
 					"name": "Add pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Vrify that all values are correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.category.id).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check type is 'number'\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.category.id).that.is.a('number');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 10,\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"animal\"\r\n  },\r\n  \"name\": \"Bulldog\",\r\n  \"photoUrls\": [\r\n    \"https://site.com/bulldog/photo\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"#dog\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}  ",
+							"raw": "{\r\n  \"id\": 10,\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"animal\"\r\n  },\r\n  \"name\": \"{{$randomFirstName}}\",\r\n  \"photoUrls\": [\r\n    \"https://site.com/bulldog/photo\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"#dog\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}  ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -104,6 +132,33 @@
 							"path": [
 								"pet",
 								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Place an order for a pet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{orderID}},\r\n  \"petId\": {{petID}},\r\n  \"quantity\": {{quantity}},\r\n  \"shipDate\": \"2025-08-26T18:02:27.753Z\",\r\n  \"status\": \"placed\",\r\n  \"complete\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base_PetStore}}/store/order",
+							"host": [
+								"{{url_base_PetStore}}"
+							],
+							"path": [
+								"store",
+								"order"
 							]
 						}
 					},
@@ -207,6 +262,156 @@
 							],
 							"path": [
 								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add pet (conent-type=JavaScript)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/javascript",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n  \"id\": 10,\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"animal\"\r\n  },\r\n  \"name\": \"Bulldog\",\r\n  \"photoUrls\": [\r\n    \"https://site.com/bulldog/photo\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"#dog\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base_PetStore}}/pet",
+							"host": [
+								"{{url_base_PetStore}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add pet (id:nNULL)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n  \"id\": NULL,\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"animal\"\r\n  },\r\n  \"name\": \"Bulldog\",\r\n  \"photoUrls\": [\r\n    \"https://site.com/bulldog/photo\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"#dog\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base_PetStore}}/pet",
+							"host": [
+								"{{url_base_PetStore}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add pet (not exist URN)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 10,\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"animal\"\r\n  },\r\n  \"name\": \"Bulldog\",\r\n  \"photoUrls\": [\r\n    \"https://site.com/bulldog/photo\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"#dog\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base_PetStore}}/pet1",
+							"host": [
+								"{{url_base_PetStore}}"
+							],
+							"path": [
+								"pet1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add pet (empty JSON object)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base_PetStore}}/pet1",
+							"host": [
+								"{{url_base_PetStore}}"
+							],
+							"path": [
+								"pet1"
 							]
 						}
 					},
