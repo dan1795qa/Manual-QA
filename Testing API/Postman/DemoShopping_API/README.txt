@@ -1,0 +1,1 @@
+Документация в Swagger --- https://intern.demoshopping.ru/api-docs/
