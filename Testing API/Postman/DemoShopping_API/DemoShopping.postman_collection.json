@@ -1,0 +1,518 @@
+{
+	"info": {
+		"_postman_id": "9bd69dd3-951d-4975-b18b-e37bdf68885d",
+		"name": "DemoShopping",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24724780"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Возвращает список всех продуктов",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Добавление нового продукта",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Автотест для извлечения ID из текстового ответа и сохранения его в переменную окружения\r",
+									"\r",
+									"// Получаем текст ответа\r",
+									"const responseText = pm.response.text();\r",
+									"\r",
+									"// Регулярное выражение для извлечения ID\r",
+									"const idMatch = responseText.match(/ID:\\s*(\\d+)/);\r",
+									"\r",
+									"// Проверяем, что ID найден\r",
+									"if (idMatch && idMatch[1]) {\r",
+									"    const productId = idMatch[1]; // Извлекаем ID\r",
+									"    pm.environment.set(\"productId\", productId); // Сохраняем ID в переменную окружения\r",
+									"    console.log(\"ID продукта успешно сохранен в переменную окружения:\", productId);\r",
+									"} else {\r",
+									"    console.error(\"ID не найден в ответе\");\r",
+									"    pm.test(\"Ответ содержит ID продукта\", function () {\r",
+									"        pm.expect(idMatch).to.not.be.null; // Проверка наличия ID\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{$randomProductName}}\",\r\n  \"description\": \"{{$randomWords}}\",\r\n  \"price\": {{$randomPrice}},\r\n  \"category\": \"{{$randomProductAdjective}}\",\r\n  \"manufacturer\": \"{{$randomJobArea}}\",\r\n  \"imageUrl\": \"{{$randomImageUrl}}\",\r\n  \"freeShipping\": {{$randomBoolean}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/add-product",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"add-product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Поиск товара по ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Автотест для сохранения категории, производителя,  в переменную окружения\r",
+									"\r",
+									"// Парсим ответ сервера\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"// Проверяем, что ответ содержит категорию\r",
+									"if (response && response.category) {\r",
+									"    // Сохраняем категорию в переменную окружения\r",
+									"    pm.environment.set(\"category\", response.category);\r",
+									"    console.log(\"Категория успешно сохранен в переменную окружения: \", response.category);\r",
+									"} else {\r",
+									"    console.error(\"Категория не найдена в ответе\");\r",
+									"    pm.test(\"Категория должена быть в ответе\", function () {\r",
+									"        pm.expect(response.category).to.not.be.undefined;\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"// Проверяем, что ответ содержит производителя\r",
+									"if (response && response.manufacturer) {\r",
+									"    // Сохраняем производителя в переменную окружения\r",
+									"    pm.environment.set(\"manufacturer\", response.manufacturer);\r",
+									"    console.log(\"Производитель успешно сохранен в переменную окружения: \", response.manufacturer);\r",
+									"} else {\r",
+									"    console.error(\"Производитель не найден в ответе\");\r",
+									"    pm.test(\"Производитель должен быть в ответе\", function () {\r",
+									"        pm.expect(response.manufacturer).to.not.be.undefined;\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/products/id/{{productId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								"id",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Поиск товаров по категории",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products/FindByCategory?category={{category}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								"FindByCategory"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "{{category}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Поиск товаров по производителю",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products/FindByManufacturer?manufacturer={{manufacturer}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								"FindByManufacturer"
+							],
+							"query": [
+								{
+									"key": "manufacturer",
+									"value": "{{manufacturer}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Поиск товаров с бесплатной доставкой",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products/FindByShipping?freeShipping=true",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								"FindByShipping"
+							],
+							"query": [
+								{
+									"key": "freeShipping",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Поиск товаров с платной доставкой Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products/FindByShipping?freeShipping=false",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								"FindByShipping"
+							],
+							"query": [
+								{
+									"key": "freeShipping",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Фильтрация списка продуктов",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products/filter?freeShipping=true&category={{category}}&manufacturer={{manufacturer}}&minPrice=0.00&maxPrice=1000",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "freeShipping",
+									"value": "true"
+								},
+								{
+									"key": "category",
+									"value": "{{category}}"
+								},
+								{
+									"key": "manufacturer",
+									"value": "{{manufacturer}}"
+								},
+								{
+									"key": "minPrice",
+									"value": "0.00"
+								},
+								{
+									"key": "maxPrice",
+									"value": "1000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Полное обновление товара ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"string\",\r\n  \"description\": \"string\",\r\n  \"price\": 0,\r\n  \"category\": \"string\",\r\n  \"manufacturer\": \"string\",\r\n  \"imageUrl\": \"string\",\r\n  \"freeShipping\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/products/id/{{productId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								"id",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Частичное обновление товара ID",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{$randomProductName}}\",\r\n  \"description\": \"{{$randomWords}}\",\r\n  \"price\": {{$randomPrice}},\r\n  \"category\": \"{{$randomProductAdjective}}\",\r\n  \"manufacturer\": \"{{$randomJobArea}}\",\r\n  \"imageUrl\": \"{{$randomImageUrl}}\",\r\n  \"freeShipping\": {{$randomBoolean}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/products/id/{{productId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								"id",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление товара по Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products/id/{{productId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								"id",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": []
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Регистрация нового пользователя",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"{{username}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Авторизация пользователя",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Автотест для сохранения токена в переменную окружения\r",
+									"\r",
+									"// Парсим ответ сервера\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"// Проверяем, что ответ содержит токен\r",
+									"if (response && response.token) {\r",
+									"    // Сохраняем токен в переменную окружения\r",
+									"    pm.environment.set(\"key\", response.token);\r",
+									"    console.log(\"Токен успешно сохранен в переменную окружения: \", response.token);\r",
+									"} else {\r",
+									"    console.error(\"Токен не найден в ответе\");\r",
+									"    pm.test(\"Токен должен быть в ответе\", function () {\r",
+									"        pm.expect(response.token).to.not.be.undefined;\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"{{username}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Database",
+			"item": [
+				{
+					"name": "Сброс базы данных",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/reset-database",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"reset-database"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
