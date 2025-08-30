@@ -11,6 +11,44 @@
 			"item": [
 				{
 					"name": "Возвращает список всех продуктов",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// if (pm.response.code === 200) {\r",
+									"    pm.test(\"Status code is 200\", function () {\r",
+									"        pm.response.to.have.status(200);\r",
+									"        console.log(\"Список продуктов получен\")\r",
+									"    });\r",
+									"// }\r",
+									"// else if (pm.response.code === 404) {\r",
+									"//     pm.test(\"Status code is 404\", function () {\r",
+									"//         pm.response.to.have.status(404);\r",
+									"//         pm.test(\"Ошибка в данных продукта\")\r",
+									"//     });\r",
+									"// }\r",
+									"\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -33,6 +71,11 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        pm.response.to.have.status(200);\r",
+									"        console.log(\"Продукт успешно добавлен\")\r",
+									"    });\r",
+									"\r",
 									"// Автотест для извлечения ID из текстового ответа и сохранения его в переменную окружения\r",
 									"\r",
 									"// Получаем текст ответа\r",
@@ -51,7 +94,22 @@
 									"    pm.test(\"Ответ содержит ID продукта\", function () {\r",
 									"        pm.expect(idMatch).to.not.be.null; // Проверка наличия ID\r",
 									"    });\r",
-									"}"
+									"}\r",
+									"\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -89,6 +147,12 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    console.log(`Продукт с ID ${productId} найден`)\r",
+									"});\r",
+									"\r",
+									"\r",
 									"// Автотест для сохранения категории, производителя,  в переменную окружения\r",
 									"\r",
 									"// Парсим ответ сервера\r",
@@ -116,7 +180,9 @@
 									"    pm.test(\"Производитель должен быть в ответе\", function () {\r",
 									"        pm.expect(response.manufacturer).to.not.be.undefined;\r",
 									"    });\r",
-									"}"
+									"}\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -126,7 +192,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									""
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									"productId = pm.environment.get(\"productId\")"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -170,6 +237,34 @@
 				},
 				{
 					"name": "Поиск товаров по категории",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    console.log(`Товар(ы) с категорией \"${category}\" найдена(ы)`)\r",
+									"});\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									"category = pm.environment.get(\"category\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -194,6 +289,36 @@
 				},
 				{
 					"name": "Поиск товаров по производителю",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    console.log(`Товар(ы) производителя \"${manufacturer}\" найдена(ы)`)\r",
+									"\r",
+									"});\r",
+									"\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									"manufacturer = pm.environment.get(\"manufacturer\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -218,6 +343,36 @@
 				},
 				{
 					"name": "Поиск товаров с бесплатной доставкой",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    console.log(`Товары с бесплатной доставкой найдена(ы)`)\r",
+									"});\r",
+									"\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -242,6 +397,35 @@
 				},
 				{
 					"name": "Поиск товаров с платной доставкой Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    console.log(`Товары с платной доставкой найдена(ы)`)\r",
+									"});\r",
+									"\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -266,6 +450,36 @@
 				},
 				{
 					"name": "Фильтрация списка продуктов",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    console.log(`Товары с категорией \"${category}\", производителя \"${manufacturer}\" найдена(ы)`)\r",
+									"});\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									"category = pm.environment.get(\"category\")\r",
+									"manufacturer = pm.environment.get(\"manufacturer\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -306,12 +520,41 @@
 				},
 				{
 					"name": "Полное обновление товара ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"string\",\r\n  \"description\": \"string\",\r\n  \"price\": 0,\r\n  \"category\": \"string\",\r\n  \"manufacturer\": \"string\",\r\n  \"imageUrl\": \"string\",\r\n  \"freeShipping\": true\r\n}",
+							"raw": "{\r\n  \"name\": \"{{$randomProductName}}\",\r\n  \"description\": \"{{$randomWords}}\",\r\n  \"price\": {{$randomPrice}},\r\n  \"category\": \"{{$randomProductAdjective}}\",\r\n  \"manufacturer\": \"{{$randomJobArea}}\",\r\n  \"imageUrl\": \"{{$randomImageUrl}}\",\r\n  \"freeShipping\": {{$randomBoolean}}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -334,6 +577,34 @@
 				},
 				{
 					"name": "Частичное обновление товара ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -362,6 +633,39 @@
 				},
 				{
 					"name": "Удаление товара по Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    console.log(`Товар с ID ${productId} успешно удалён`)\r",
+									"});\r",
+									"\r",
+									"pm.environment.unset(\"productId\");\r",
+									"pm.environment.unset(\"category\");\r",
+									"pm.environment.unset(\"manufacturer\");\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									"productId = pm.environment.get(\"productId\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -382,14 +686,39 @@
 			]
 		},
 		{
-			"name": "Cart",
-			"item": []
-		},
-		{
 			"name": "Users",
 			"item": [
 				{
 					"name": "Регистрация нового пользователя",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        pm.response.to.have.status(200);\r",
+									"        console.log(\"Регистрация выполнена успешно\")\r",
+									"    });\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -427,6 +756,13 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        pm.response.to.have.status(200);\r",
+									"        console.log(\"Авторизация выполнена успешно\")\r",
+									"    });\r",
+									"\r",
+									"\r",
+									"\r",
 									"// Автотест для сохранения токена в переменную окружения\r",
 									"\r",
 									"// Парсим ответ сервера\r",
@@ -442,7 +778,22 @@
 									"    pm.test(\"Токен должен быть в ответе\", function () {\r",
 									"        pm.expect(response.token).to.not.be.undefined;\r",
 									"    });\r",
-									"}"
+									"}\r",
+									"\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -478,8 +829,259 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Добавление нового пользователя",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        pm.response.to.have.status(200);\r",
+									"        console.log(\"Добавление пользователя выполнено успешно\")\r",
+									"    });\r",
+									"\r",
+									"\r",
+									"\r",
+									"// Автотест для извлечения ID пользователя из текстового ответа и сохранения его в переменную окружения\r",
+									"\r",
+									"// Получаем текст ответа\r",
+									"const responseText = pm.response.text();\r",
+									"\r",
+									"// Регулярное выражение для извлечения ID\r",
+									"const idMatch = responseText.match(/ID:\\s*(\\d+)/);\r",
+									"\r",
+									"// Проверяем, что ID найден\r",
+									"if (idMatch && idMatch[1]) {\r",
+									"    const userId_add = idMatch[1]; // Извлекаем ID\r",
+									"    pm.environment.set(\"userId_add\", userId_add); // Сохраняем ID в переменную окружения\r",
+									"    console.log(\"ID пользователя успешно сохранен в переменную окружения:\", userId_add);\r",
+									"} else {\r",
+									"    console.error(\"ID не найден в ответе\");\r",
+									"    pm.test(\"Ответ содержит ID пользователя\", function () {\r",
+									"        pm.expect(idMatch).to.not.be.null; // Проверка наличия ID\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"{{username_add}}\",\r\n  \"password\": \"{{password_add}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение всех user_id и login пользователей",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    console.log(`Список пользователей получен`)\r",
+									"});\r",
+									"\r",
+									"\r",
+									"// Парсим JSON-ответ\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"// Значение login, которое мы ищем\r",
+									"const targetLogin = \"dan12345\";\r",
+									"\r",
+									"// Находим объект с нужным login\r",
+									"const user = response.find(item => item.login === targetLogin);\r",
+									"\r",
+									"if (user) {\r",
+									"    // Получаем user_id\r",
+									"    const userId = user.user_id;\r",
+									"\r",
+									"    // Сохраняем user_id в переменную окружения\r",
+									"    pm.environment.set(\"user_id\", userId);\r",
+									"\r",
+									"    console.log(\"ID пользователя успешно сохранен в переменную окружения:\", userId);\r",
+									"} else {\r",
+									"    console.error(`Пользователь с login \"${targetLogin}\" не найден.`);\r",
+									"}\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление зарегистрированного пользователя по ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    console.log(`Пользователь с ID ${pm.environment.get(\"user_id\")} успешно удалён`)\r",
+									"});\r",
+									"\r",
+									"pm.environment.unset(\"user_id\");\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление добавленного пользователя по ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    console.log(`Пользователь с ID ${pm.environment.get(\"userId_add\")} успешно удалён`)\r",
+									"});\r",
+									"\r",
+									"pm.environment.unset(\"userId_add\");\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/{{userId_add}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{userId_add}}"
+							]
+						}
+					},
+					"response": []
 				}
 			]
+		},
+		{
+			"name": "Cart",
+			"item": []
 		},
 		{
 			"name": "Database",
