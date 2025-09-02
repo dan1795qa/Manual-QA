@@ -1637,7 +1637,7 @@
 					"response": []
 				},
 				{
-					"name": "Получение данных об оплаченных заказах",
+					"name": "Получение данных о заказах",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -1655,7 +1655,7 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
-									"    console.log(\"Данные об оплаченных заказах пользователя получены успешно\")\r",
+									"    console.log(\"Данные об истории заказов пользователя получены успешно\")\r",
 									"});\r",
 									"\r",
 									"console.log(\"------------------Конец запроса---------------------------\")\r",
@@ -1814,7 +1814,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"card_type\": \"MasterCard\",\r\n  \"card_code\": \"5248106661644884\",\r\n  \"expiry_month\": 0,\r\n  \"expiry_year\": 0,\r\n  \"cvv\": \"456\",\r\n  \"email\": {{$randomEmail}},\r\n  \"email_paypal\": {{$randomEmail}}\r\n}",
+							"raw": "{\r\n  \"card_type\": \"MasterCard\",\r\n  \"card_code\": \"5248106661644884\",\r\n  \"expiry_month\": 12,\r\n  \"expiry_year\": 26,\r\n  \"cvv\": \"456\",\r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"email_paypal\": \"{{$randomEmail}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2444,7 +2444,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"card_type\": \"MasterCard\",\r\n  \"card_code\": \"5248106661644884\",\r\n  \"expiry_month\": 0,\r\n  \"expiry_year\": 0,\r\n  \"cvv\": \"456\",\r\n  \"email\": {{$randomEmail}},\r\n  \"email_paypal\": {{$randomEmail}}\r\n}",
+							"raw": "{\r\n  \"card_type\": \"MasterCard\",\r\n  \"card_code\": \"5248106661644884\",\r\n  \"expiry_month\": 0,\r\n  \"expiry_year\": 0,\r\n  \"cvv\": \"456\",\r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"email_paypal\": \"{{$randomEmail}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
