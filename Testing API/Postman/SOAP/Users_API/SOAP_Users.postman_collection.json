@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "ae443e79-8b3d-4806-aace-12a004ae59d7",
+		"name": "SOAP_Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24724780"
+	},
+	"item": [
+		{
+			"name": "doRegister",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:wrap=\"http://foo.bar/wrappersoapserver\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <wrap:doRegister>\r\n         <email>qa@gmail.com</email>\r\n         <name>qqd555</name>\r\n         <password>1</password>\r\n      </wrap:doRegister>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/soap/WrapperSoapServer.php?wsdl\n",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"soap",
+						"WrapperSoapServer.php"
+					],
+					"query": [
+						{
+							"key": "wsdl\n",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "doLogin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:wrap=\"http://foo.bar/wrappersoapserver\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <wrap:doRegister>\r\n         <email>qa@gmail.com</email>\r\n         <name>qqd555</name>\r\n         <password>1</password>\r\n      </wrap:doRegister>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/soap/WrapperSoapServer.php?wsdl\n",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"soap",
+						"WrapperSoapServer.php"
+					],
+					"query": [
+						{
+							"key": "wsdl\n",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCompany",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:wrap=\"http://foo.bar/wrappersoapserver\" xmlns:soapenc=\"http://schemas.xmlsoap.org/soap/encoding/\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <wrap:CreateCompany>\r\n         <company_name>Тестовая компания</company_name>\r\n         <company_type>ООО</company_type>\r\n         <email_owner>manager@mail.ru</email_owner>\r\n           <company_users soapenc:arrayType=\"xsd:array[]\">\r\n                    <item>test_cu_11@mail.com</item>\r\n                    <item>test_dev@mail.com</item>\r\n                    <item>ivan@noibiz.com</item>\r\n        </company_users>\r\n      </wrap:CreateCompany>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/soap/WrapperSoapServer.php?wsdl\n",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"soap",
+						"WrapperSoapServer.php"
+					],
+					"query": [
+						{
+							"key": "wsdl\n",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
