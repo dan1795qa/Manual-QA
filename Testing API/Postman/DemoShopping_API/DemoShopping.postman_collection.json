@@ -410,19 +410,35 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"// if (pm.response.code === 200) {\r",
-									"    pm.test(\"Status code is 200\", function () {\r",
+									"pm.test(\"Status code is 200\", function () {\r",
 									"        pm.response.to.have.status(200);\r",
 									"        console.log(\"Список продуктов получен\")\r",
-									"    });\r",
-									"// }\r",
-									"// else if (pm.response.code === 404) {\r",
-									"//     pm.test(\"Status code is 404\", function () {\r",
-									"//         pm.response.to.have.status(404);\r",
-									"//         pm.test(\"Ошибка в данных продукта\")\r",
-									"//     });\r",
-									"// }\r",
+									"});\r",
 									"\r",
+									"pm.test(\"Ответ является массивом продуктов с корректной структурой\", function () {\r",
+									"    let responseData = pm.response.json();\r",
+									"\r",
+									"    // Проверка, что ответ является массивом\r",
+									"    pm.expect(Array.isArray(responseData)).to.be.true;\r",
+									"    \r",
+									"    // Проверка, что каждый объект в массиве имеет правильную структуру\r",
+									"    if (Array.isArray(responseData)) {\r",
+									"        responseData.forEach((item) => {\r",
+									"            pm.expect(item).to.have.property('product_id').that.is.a('number');\r",
+									"            pm.expect(item).to.have.property('name').that.is.a('string');\r",
+									"            pm.expect(item).to.have.property('description').that.is.a('string');\r",
+									"            pm.expect(item).to.have.property('price').that.is.a('string');\r",
+									"            pm.expect(item).to.have.property('category').that.is.a('string');\r",
+									"            pm.expect(item).to.have.property('manufacturer').that.is.a('string');\r",
+									"            pm.expect(item).to.have.property('imageUrl').that.is.a('string');\r",
+									"            pm.expect(item).to.have.property('freeShipping').that.is.oneOf([0, 1]);\r",
+									"        });\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Время ответа меньше, чем 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
 									"\r",
 									"console.log(\"------------------Конец запроса---------------------------\")\r",
 									""
@@ -469,6 +485,16 @@
 									"        pm.response.to.have.status(200);\r",
 									"        console.log(\"Продукт успешно добавлен\")\r",
 									"    });\r",
+									"\r",
+									"\r",
+									"pm.test(\"Тело ответа содержит информацию о добавлении товара\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Продукт успешно добавлен с ID:\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Время ответа меньше, чем 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
 									"\r",
 									"// Автотест для извлечения ID из текстового ответа и сохранения его в переменную окружения\r",
 									"\r",
@@ -575,6 +601,32 @@
 									"        pm.expect(response.manufacturer).to.not.be.undefined;\r",
 									"    });\r",
 									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									"// Проверка типов данных в теле ответа\r",
+									"pm.test(\"Проверка типов данных в теле ответа\", function () {\r",
+									"    var responseData = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseData.product_id).to.be.a('number', 'product_id должен быть числом');\r",
+									"    pm.expect(responseData.name).to.be.a('string', 'name должно быть строкой');\r",
+									"    pm.expect(responseData.description).to.be.a('string', 'description должно быть строкой');\r",
+									"    // Проверяем, что price может быть как строкой, так и числом, так как в JSON может встречаться оба варианта\r",
+									"    pm.expect(responseData.price).to.satisfy(function (num) { \r",
+									"        return typeof num === 'string' || typeof num === 'number'; \r",
+									"    }, 'price должен быть строкой или числом');\r",
+									"    pm.expect(responseData.category).to.be.a('string', 'category должно быть строкой');\r",
+									"    pm.expect(responseData.manufacturer).to.be.a('string', 'manufacturer должно быть строкой');\r",
+									"    pm.expect(responseData.imageUrl).to.be.a('string', 'imageUrl должно быть строкой');\r",
+									"    // Проверяем freeShipping на соответствие типу boolean или number, так как 0 может интерпретироваться как false\r",
+									"    pm.expect(responseData.freeShipping).to.satisfy(function (num) { \r",
+									"        return typeof num === 'boolean' || typeof num === 'number'; \r",
+									"    }, 'freeShipping должен быть boolean или числом');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Время ответа меньше, чем 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
 									"\r",
 									"console.log(\"------------------Конец запроса---------------------------\")"
 								],
@@ -923,6 +975,9 @@
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
+									"pm.test(\"Время ответа меньше, чем 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
 									"\r",
 									"console.log(\"------------------Конец запроса---------------------------\")\r",
 									""
@@ -978,6 +1033,10 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Время ответа меньше, чем 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
 									"});\r",
 									"\r",
 									"console.log(\"------------------Конец запроса---------------------------\")\r",
@@ -1037,9 +1096,13 @@
 									"    console.log(`Товар с ID ${productId} успешно удалён`)\r",
 									"});\r",
 									"\r",
-									"pm.environment.unset(\"productId\");\r",
 									"pm.environment.unset(\"category\");\r",
 									"pm.environment.unset(\"manufacturer\");\r",
+									"\r",
+									"pm.test(\"Время ответа меньше, чем 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
 									"\r",
 									"console.log(\"------------------Конец запроса---------------------------\")\r",
 									""
@@ -1063,6 +1126,77 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products/id/{{productId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								"id",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Поиск товара по ID после удаления",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"    console.log(`Продукт с ID ${productId} не найден`)\r",
+									"});\r",
+									"\r",
+									"pm.environment.unset(\"productId\");\r",
+									"\r",
+									"pm.test(\"Время ответа меньше, чем 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									"productId = pm.environment.get(\"productId\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{base_url}}/products/id/{{productId}}",
 							"host": [
@@ -2114,6 +2248,73 @@
 					"response": []
 				},
 				{
+					"name": "Получение всех user_id и login пользователей",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    console.log(`Список пользователей получен`)\r",
+									"});\r",
+									"\r",
+									"\r",
+									"// Парсим JSON-ответ\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"// Значение login, которое мы ищем\r",
+									"const targetLogin = \"dan12345\";\r",
+									"\r",
+									"// Находим объект с нужным login\r",
+									"const user = response.find(item => item.login === targetLogin);\r",
+									"\r",
+									"if (user) {\r",
+									"    // Получаем user_id\r",
+									"    const userId = user.user_id;\r",
+									"\r",
+									"    // Сохраняем user_id в переменную окружения\r",
+									"    pm.environment.set(\"user_id\", userId);\r",
+									"\r",
+									"    console.log(\"ID пользователя успешно сохранен в переменную окружения:\", userId);\r",
+									"} else {\r",
+									"    console.error(`Пользователь с login \"${targetLogin}\" не найден.`);\r",
+									"}\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Добавление нового продукта Copy",
 					"event": [
 						{
@@ -2444,7 +2645,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"card_type\": \"MasterCard\",\r\n  \"card_code\": \"5248106661644884\",\r\n  \"expiry_month\": 0,\r\n  \"expiry_year\": 0,\r\n  \"cvv\": \"456\",\r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"email_paypal\": \"{{$randomEmail}}\"\r\n}",
+							"raw": "{\r\n  \"card_type\": \"MasterCard\",\r\n  \"card_code\": \"5248106661644884\",\r\n  \"expiry_month\": 12,\r\n  \"expiry_year\": 26,\r\n  \"cvv\": \"456\",\r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"email_paypal\": \"{{$randomEmail}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2458,6 +2659,55 @@
 							],
 							"path": [
 								"pay"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление зарегистрированного пользователя по ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"------------------Начало запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    console.log(`Пользователь с ID ${pm.environment.get(\"user_id\")} успешно удалён`)\r",
+									"});\r",
+									"\r",
+									"pm.environment.unset(\"user_id\");\r",
+									"\r",
+									"console.log(\"------------------Конец запроса---------------------------\")\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_id}}"
 							]
 						}
 					},
