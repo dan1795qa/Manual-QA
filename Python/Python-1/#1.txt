@@ -1,0 +1,11 @@
+После отправки запроса, мы получили ответ от сервера
+
+response_json = '''['animal', 'career', 'celebrity', 'dev', 'explicit', 'fashion', 'food', 'history', 'money', 'movie', 'music', 'political', 'religion', 'science', 'sport', 'travel']'''
+
+Посчитайте количество категорий в ответе и выведите на печать.
+
+====================Решение=========================
+
+response_json = ['animal', 'career', 'celebrity', 'dev', 'explicit', 'fashion', 'food', 'history', 'money', 'movie', 'music', 'political', 'religion', 'science', 'sport', 'travel']
+
+print(len(response_json))

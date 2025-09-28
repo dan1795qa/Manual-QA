@@ -1,0 +1,19 @@
+После отправки запроса, мы получили ответ от сервера
+
+response_json = '''['animal', 'career', 'celebrity', 'dev', 'explicit', 'fashion', 'food', 'history', 'money', 'movie', 'music', 'political', 'religion', 'science', 'sport', 'travel']'''
+
+Выведите на печать содержимое списка с добавлением нумерации, построчно, как в примере:
+
+1.animal
+2.career
+3.celebrity
+
+Между цифрой и категорией стоит разделитель в виде точки, без пробелов.
+
+====================Решение=========================
+
+response_json = ['animal', 'career', 'celebrity', 'dev', 'explicit', 'fashion', 'food', 'history', 'money', 'movie', 'music', 'political', 'religion', 'science', 'sport', 'travel']
+
+response = {k:v for k, v in enumerate(response_json, start=1)}
+for k, v in response.items():
+    print(f"{k}.{v}")
