@@ -1,0 +1,17 @@
+После отправки запроса, мы получили ответ от сервера
+
+response_json = '''["animal", "dev", "career", "food", "celebrity", "explicit", "fashion", "history", "money", "movie", "political", "music", "religion", "science", "travel","sport"]'''
+
+Выведите на печать содержимое списка в алфавитном порядке, построчно, как в примере:
+
+animal
+career
+celebrity
+====================Решение=========================
+
+response_json = ["animal", "dev", "career", "food", "celebrity", "explicit", "fashion", "history", "money", "movie", "political", "music", "religion", "science", "travel","sport"]
+
+response = sorted(response_json)
+
+for i in response:
+    print(i)
