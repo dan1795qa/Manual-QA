@@ -1,0 +1,40 @@
+После отправки запроса, мы получили ответ от сервера
+
+response_json = '''{
+    "location": {
+        "latitude": -38.383494,
+        "longitude": 33.427362
+    },
+    "accuracy": 50,
+    "name": "Frontline house",
+    "address": "29, side layout, cohen 09",
+    "types": "shoe park,shop",
+    "website": "http://google.com",
+    "language": "French-IN"
+}'''
+
+Напишите код, который выедет на печать ответ в данном формате:
+
+Место: данные из поля "name"
+Адрес: данные из поля "address"
+Координаты: -38.383494, 33.427362
+Вебсайт: данные из поля "website"
+Язык: данные из поля "language"
+
+
+====================Решение=========================
+
+response_json = {
+    "location": {
+        "latitude": -38.383494,
+        "longitude": 33.427362
+    },
+    "accuracy": 50,
+    "name": "Frontline house",
+    "address": "29, side layout, cohen 09",
+    "types": "shoe park,shop",
+    "website": "http://google.com",
+    "language": "French-IN"
+}
+
+print(f"Место: {response_json['name']}\nАдрес: {response_json['address']}\nКоординаты: {response_json['location']['latitude']}, {response_json['location']['longitude']}\nВебсайт: {response_json['website']}\nЯзык: {response_json['language']}")
