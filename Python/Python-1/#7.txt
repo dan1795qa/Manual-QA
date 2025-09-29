@@ -1,0 +1,26 @@
+После отправки запроса, мы получили ответ от сервера
+
+response_json = '''{
+    "categories": [],
+    "created_at": "2020-01-05 13:42:29.569033",
+    "icon_url": "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
+    "id": "Me_rU2v5SbSomTRfjwfaPg",
+    "updated_at": "2020-01-05 13:42:29.569033",
+    "url": "https://api.chucknorris.io/jokes/Me_rU2v5SbSomTRfjwfaPg",
+    "value": "Chuck Norris is the reason Atlantis no longer exists."
+}'''
+
+Посчитайте количество символов (без учета "_") в значении поля id и выведите на печать.
+
+====================Решение=========================
+
+response_json = {
+    "categories": [],
+    "created_at": "2020-01-05 13:42:29.569033",
+    "icon_url": "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
+    "id": "Me_rU2v5SbSomTRfjwfaPg",
+    "updated_at": "2020-01-05 13:42:29.569033",
+    "url": "https://api.chucknorris.io/jokes/Me_rU2v5SbSomTRfjwfaPg",
+    "value": "Chuck Norris is the reason Atlantis no longer exists."
+}
+print(len(response_json['id'].replace("_", "")))
