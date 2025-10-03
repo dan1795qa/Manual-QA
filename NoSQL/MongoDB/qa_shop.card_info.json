@@ -1,0 +1,130 @@
+[{
+  "_id": {
+    "$oid": "68df8eaee670157f9aacace0"
+  },
+  "card_id": 1,
+  "card_type": "VISA",
+  "expiry_month": 12,
+  "expiry_year": 26,
+  "cvv": 123,
+  "balance": 523,
+  "status": "valid",
+  "card_code": 8820354696467284
+},
+{
+  "_id": {
+    "$oid": "68df8eaee670157f9aacace1"
+  },
+  "card_id": 2,
+  "card_type": "MasterCard",
+  "expiry_month": 12,
+  "expiry_year": 26,
+  "cvv": 456,
+  "balance": 873,
+  "status": "valid",
+  "card_code": 5248106661644884
+},
+{
+  "_id": {
+    "$oid": "68df8eaee670157f9aacace2"
+  },
+  "card_id": 3,
+  "card_type": "VISA",
+  "expiry_month": 1,
+  "expiry_year": 20,
+  "cvv": 789,
+  "balance": 2000,
+  "status": "expired",
+  "card_code": 4340511554108849
+},
+{
+  "_id": {
+    "$oid": "68df90eee670157f9aacace3"
+  },
+  "card_id": 4,
+  "card_type": "MasterCard",
+  "expiry_month": 1,
+  "expiry_year": 20,
+  "cvv": 101,
+  "balance": 2000,
+  "status": "expired",
+  "card_code": 307328035514696
+},
+{
+  "_id": {
+    "$oid": "68df90eee670157f9aacace4"
+  },
+  "card_id": 5,
+  "card_type": "VISA",
+  "expiry_month": 6,
+  "expiry_year": 26,
+  "cvv": 234,
+  "balance": 2000,
+  "status": "stolen",
+  "card_code": 779330784258313
+},
+{
+  "_id": {
+    "$oid": "68df90eee670157f9aacace5"
+  },
+  "card_id": 6,
+  "card_type": "MasterCard",
+  "expiry_month": 6,
+  "expiry_year": 26,
+  "cvv": 567,
+  "balance": 2000,
+  "status": "stolen",
+  "card_code": 1151842195999505
+},
+{
+  "_id": {
+    "$oid": "68df90eee670157f9aacace6"
+  },
+  "card_id": 7,
+  "card_type": "VISA",
+  "expiry_month": 12,
+  "expiry_year": 26,
+  "cvv": 890,
+  "balance": 0,
+  "status": "valid",
+  "card_code": 7178218557247775
+},
+{
+  "_id": {
+    "$oid": "68df90eee670157f9aacace7"
+  },
+  "card_id": 8,
+  "card_type": "MasterCard",
+  "expiry_month": 12,
+  "expiry_year": 26,
+  "cvv": 112,
+  "balance": 0,
+  "status": "valid",
+  "card_code": 3320643190265792
+},
+{
+  "_id": {
+    "$oid": "68df90eee670157f9aacace8"
+  },
+  "card_id": 9,
+  "card_type": "VISA",
+  "expiry_month": 12,
+  "expiry_year": 26,
+  "cvv": 0,
+  "balance": 2000,
+  "status": "blocked",
+  "card_code": 9181347306820824
+},
+{
+  "_id": {
+    "$oid": "68df90eee670157f9aacace9"
+  },
+  "card_id": 10,
+  "card_type": "MasterCard",
+  "expiry_month": 12,
+  "expiry_year": 26,
+  "cvv": 0,
+  "balance": 2000,
+  "status": "blocked",
+  "card_code": 6107972359241284
+}]
