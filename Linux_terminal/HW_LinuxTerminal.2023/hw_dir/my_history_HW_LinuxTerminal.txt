@@ -1,0 +1,57 @@
+  288  mkdir hw_dir
+  289  cd hw_dir/
+  290  mkdir dir1 dir2 dir3
+  291  cd dir1
+  292  touch 1.txt 2.txt 3.txt 1.json 2.json
+  293  mkdir 1 2 3
+  294  ls -la
+  295  cat >> 1.txt
+  296  cd ..
+  297  ls -la
+  298  mv cd dir1
+  299  cd dir1
+  300  ls
+  301  mv 1.json 2.json 1/
+  302  cd 1
+  303  ls
+  304  cd..
+  305  cd ..
+  306  ls
+  307  mv 1.txt 2.txt 3.txt 2/
+  308  ls
+  309  cp 3 1/
+  310  cp -r 3 1/
+  311  cd 1
+  312  ls
+  313  cd ..
+  314  ls
+  315  find 1 -name "*.json"
+  316  find 2 -name "2.txt"
+  317  find . -name "*.txt"
+  318  cd 2
+  319  vim 1.txt
+  320  grep Anna .
+  321  grep -r Anna .
+  322  grep -r -i igor .
+  323  grep -r -i oleg .
+  324  grep -r Anna . > Anna_files.txt
+  325  ls
+  326  cat Anna_files.txt 
+  327  head 5 1.txt 
+  328  head 1.txt
+  329  less 1.txt
+  330  tail 1.txt 
+  331  date
+  332  curl http://162.55.220.72.5005/terminal-hw-request
+  333  curl http://162.55.220.72.5005/
+  334  cd ..
+  335  cd ..
+  336  mkdir hw_script
+  337  cd hw_script/
+  338  cat > script_comand_linux.sh
+  339  pwd
+  340  history 50
+  341  history 60
+  342  history 55 > hw_dir/my_histury_HW_LinuxTerminal.txt
+  343  cd ..
+  344  history 57 >> my_histury_HW_LinuxTerminal.txt
